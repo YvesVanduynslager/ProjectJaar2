@@ -1,0 +1,65 @@
+﻿@using TILE03.Models.Domain
+@model IEnumerable<Sessie>
+
+<h1>Sessies</h1>
+
+<section id="sessiesOverzicht">
+
+    <table class="table table-striped table-condensed table-bordered">
+        <tr>
+            <th>Naam</th>
+            <th>Omschrijving</th>
+            <th>Code</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Naam</td>
+                <td>@item.Omschrijving</td>
+                <td>@item.Code</td>
+                <td>@item.StateDisplayName</td>
+                <td>
+                    <a asp-controller="Beheren" asp-action="ToonGroepen" asp-route-id="@item.Id">Toon Details</a>
+                </td>
+            </tr>
+        }
+    </table>
+
+    @*oude UI*@
+    @*@foreach (var sessie in Model)
+    {
+            <div>
+                <h3 class="h3Inline">@sessie.Naam: @sessie.Omschrijving (@sessie.Code)</h3>
+                @if (sessie.StateType == 0)
+                {
+                    <form method="get" asp-controller="Beheren" asp-action="Activeer" asp-route-id="@sessie.Id">
+                        <button class="btn btn-danger" type="submit">Activeer</button>
+                    </form>
+                    <br/>
+                }
+                else
+                {
+                    <form method="get" asp-controller="Beheren" asp-action="Deactiveer" asp-route-id="@sessie.Id">
+                        <button class="btn btn-danger" type="submit">Deactiveer</button>
+                    </form>
+                    <br/>
+                }
+            </div>
+            
+            <form method="post" asp-controller="Beheren" asp-action="ToonGroepen" asp-route-id="@sessie.Id">
+                <button class="btn btn-primary" type="submit">Toon groepen</button>
+            </form>
+        
+    }*@
+    <div id="buttons">
+        <div class="form-group">
+            <form method="get" asp-controller="Beheren" asp-action="Index">
+                <button class="btn btn-primary" type="submit">Refresh</button>
+            </form>
+        </div>
+    </div>
+</section>

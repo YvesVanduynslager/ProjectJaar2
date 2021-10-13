@@ -1,0 +1,30 @@
+﻿@model TILE03.Models.Domain.Sessie
+
+<div id="instructies">
+    <h1>Instructies</h1>
+    <p>De bedoeling van het spel is dat je zo snel mogelijk alle opdrachten oplost.</p>
+    <p>Een opdracht bestaat uit twee delen: een oefening en een actie</p>
+    <p>Nadat je een oefening oplost moet je nog een extra bewerking uitvoeren op je oplossing. Dit is je antwoord die je moet ingeven in het tekstvak.</p>
+    <p>Als je antwoord correct is krijg je een uit te voeren actie te zien.</p>
+    <p>Voer deze actie uit om een toegangscode te krijgen die je toegang geeft tot de volgende opdracht</p>
+    <br/>
+    <p>VEEL SUCCES!</p>
+</div>
+
+@if (Model.StateType == 2)
+{
+    <br />
+    <form asp-action="StartSessie" asp-route-id=@ViewData["groepId"] method="post">
+        <button id="startButton" class="btn btn-primary" type="submit">Start Spel</button>
+    </form>
+}
+else
+{
+    <br />
+    <div class="submit-progress">
+        <label>Gelieve te wachten tot alle groepen aangemeld zijn en de leerkracht deze sessie activeert...</label>
+    </div>
+}
+
+
+

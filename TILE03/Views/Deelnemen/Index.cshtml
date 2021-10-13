@@ -1,0 +1,32 @@
+﻿@using TILE03.Models.ViewModels
+@model DeelnemenIndexViewModel
+
+@{
+    ViewData["Title"] = @ViewData["OefeningOpgave"];
+}
+
+<h1>Geef je sessiecode in om het spel te beginnen</h1>
+
+@if (ViewData["Error"] != null)
+{
+    <h3 class="error">@ViewData["Error"]</h3>
+}
+
+<form asp-action="ControleerSessiecode" method="post">
+    <div class="form-group">
+        <label asp-for="Code">Code</label>
+        <input asp-for="Code" class="form-control" type="text" id="Code" name="Code"/>
+        <span asp-validation-for="Code" class="text-danger"></span>
+    </div>
+    <div>
+        <button class="btn btn-primary" type="submit">Open sessie</button>
+    </div>
+</form>
+<br/>
+<a asp-controller="Beheren" asp-action="Index">Beheer Sessies</a>
+<br />
+
+@section scripts{
+    <script asp-src-include="lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script asp-src-include="lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}

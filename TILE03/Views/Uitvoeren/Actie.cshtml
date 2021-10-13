@@ -1,0 +1,33 @@
+﻿@using TILE03.Models.ViewModels
+@model ActieViewModel
+@{
+    ViewData["Title"] = "Actie";
+}
+
+<h2>Actie</h2>
+<h3>Je antwoord was: @ViewData["Antwoord"]</h3>
+<p>@ViewData["Actie"]</p>
+
+@if (ViewData["Error"] != null)
+{
+    <h3 class="error">@ViewData["Error"]</h3>
+}
+<div>
+    <form asp-action="VolgendeOpdracht" method="post">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="form-group">
+            <label asp-for="Code"></label>
+            <input asp-for="Code" class="form-control" />
+            <span asp-validation-for="Code" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <button class="btn btn-primary" type="submit">Controleer</button>
+        </div>
+    </form>
+</div>
+
+@section scripts{
+    <script asp-src-include="lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script asp-src-include="lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+}

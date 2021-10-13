@@ -1,0 +1,45 @@
+﻿@model TILE03.Models.Domain.Sessie
+
+<h1>Gelieve je groep aan te duiden voor @Model.Code : @Model.Omschrijving</h1>
+
+@foreach (var groep in Model.Groepen)
+{
+    <form asp-action="GroepAanmelden" asp-route-id="@Model.Id" asp-route-groepId="@groep.Id" method="post">
+        <h3>groep @groep.Id</h3>
+        <ul>
+            @foreach (var leerling in groep.Leerlingen)
+            {
+                <li>@leerling.Voornam @leerling.Naam</li>
+            }
+        </ul>
+        <button class="btn btn-primary">Aanmelden</button>
+    </form>
+}
+
+@*@section scripts{
+    <script type="text/javascript">
+        function checkIfSessionIsActive() {
+            @if (Model.Actief)
+            {
+                <text>
+            console.log('sessie is actief');
+            $(".btn-starten").removeClass("hidden");
+            $(".btn-aanmelden").addClass("hidden");
+            $(".submit-progress").addClass("hidden");
+                </text>
+
+            }
+            console.log('sessie is niet actief');
+            DisplayProgressMessage();
+            setTimeout(checkIfSessionIsActive, 5000);
+        }
+        function DisplayProgressMessage() {          
+
+            $(".submit-progress").removeClass("hidden");
+
+            return true;
+
+        };
+        document.getElementById("pollButton").onclick = checkIfSessionIsActive;
+    </script>*@
+

@@ -1,0 +1,37 @@
+﻿@using TILE03.Models.ViewModels
+@model AntwoordViewModel
+
+@{
+    ViewData["Title"] = @ViewData["OefeningOpgave"];
+}
+<h2>@ViewData["Title"]</h2>
+
+@if (ViewData["Blocked"] != null)
+{
+    <p>@ViewData["Feedback"]</p>
+    <form method="get" asp-controller="Uitvoeren" asp-action="Deblokkeer">
+        <button class="btn btn-info" type="submit">Deblokkeren</button>
+    </form>
+}
+else
+{
+    <section id="opgave">
+        @if (ViewData["PDF"] != null)
+        {
+            <form method="get" asp-controller="Uitvoeren" asp-action="VerbergPdf">
+                <button class="btn btn-info" type="submit">Verberg PDF</button>
+            </form>
+
+            <embed src=@ViewData["PDF"] height="825" id="PDF" type="application/pdf" frameBorder="2" />
+        }
+        else
+        {
+            <form method="get" asp-controller="Uitvoeren" asp-action="ToonPdf">
+                <button class="btn btn-info" type="submit">Toon PDF</button>
+            </form>
+        }
+    </section>
+}
+
+@Html.Partial("_Vooruitgang")
+@Html.Partial("_Antwoord", Model)

@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <UserSecretsId>aspnet-TILE03-0E7C65D2-3717-4D69-AAE1-F431C9911167</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20180403150848_initMapping.cs" />
+    <Compile Remove="Data\Migrations\20180403150848_initMapping.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180403153430_MappingsModel.cs" />
+    <Compile Remove="Data\Migrations\20180403153430_MappingsModel.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180404120927_GroepsbewerkingenMappings.cs" />
+    <Compile Remove="Data\Migrations\20180404120927_GroepsbewerkingenMappings.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180404121738_updateBewerkingenMappings.cs" />
+    <Compile Remove="Data\Migrations\20180404121738_updateBewerkingenMappings.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180404122344_updateMappings.cs" />
+    <Compile Remove="Data\Migrations\20180404122344_updateMappings.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180404123243_initMappings.cs" />
+    <Compile Remove="Data\Migrations\20180404123243_initMappings.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180404142740_mappingUpdateUniekPad.cs" />
+    <Compile Remove="Data\Migrations\20180404142740_mappingUpdateUniekPad.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180405114441_updateMappings.cs" />
+    <Compile Remove="Data\Migrations\20180405114441_updateMappings.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180405114732_updateMappingsOefening.cs" />
+    <Compile Remove="Data\Migrations\20180405114732_updateMappingsOefening.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180405115041_updateMappings.cs" />
+    <Compile Remove="Data\Migrations\20180405115041_updateMappings.Designer.cs" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.2" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.1" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\lib\jquery-ui-1.12.1.custom\external\jquery\jquery.js" />
+    <None Include="wwwroot\lib\jquery-ui-1.12.1.custom\jquery-ui.js" />
+    <None Include="wwwroot\lib\jquery-ui-1.12.1.custom\jquery-ui.min.js" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,21 @@
+﻿@using TILE03.Models.Domain
+
+<aside id="vooruitgang" class="shadow">
+    <h3>Vooruitgang</h3>
+    @if ((@ViewData["Vooruitgang"] as List<Vooruitgang>).Count != 0)
+    {
+
+        <div>
+            @foreach (var line in @ViewData["Vooruitgang"] as List<Vooruitgang>)
+            {
+                <ul>
+                    <li>@line.Line</li>
+                </ul>
+            }
+        </div>
+    }
+    <div>
+        <p>@ViewData["PlaatsInReeks"]</p>
+    </div>
+
+</aside>

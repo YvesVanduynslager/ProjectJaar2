@@ -1,0 +1,128 @@
+﻿@using TILE03.Models.Domain
+@model TILE03.Models.Domain.Sessie
+
+<h1>Details voor sessie @Model.Code</h1>
+<h3>Status: @Model.StateDisplayName</h3>
+
+<section id="groepen">
+    @*@if (sessie.Groepen.Count == 0)*@
+    @if (@Model.StateType == 0)
+    {
+        <form method="get" asp-controller="Beheren" asp-action="Activeer" asp-route-id="@Model.Id">
+            <button class="btn btn-danger" type="submit">Activeer</button>
+        </form>
+        <br />
+    }
+    else
+    {
+        <div>
+            <form class="form-inline" method="get" asp-controller="Beheren" asp-action="Deactiveer" asp-route-id="@Model.Id">
+                <button class="btn btn-danger" type="submit">Deactiveer</button>
+            </form>
+            @if (Model.StateType != 2)
+            {
+                <form id="startSpelForm" class="form-inline" method="get" asp-controller="Beheren" asp-action="StartSpel" asp-route-id="@Model.Id">
+                    <button class="btn btn-danger" type="submit" id="btnStartSpel">Start Spel</button>
+                </form>
+            }
+        </div>
+        <br />
+    }
+    <div id="confirmDialog" title="Waarschuwing" hidden>
+        <p>Opgelet, sommige groepen zijn niet aangemeld! Wenst u toch het spel te starten?</p>
+    </div>
+    @if (Model.Groepen.Count == 0)
+    {
+        <p>Deze sessie heeft geen groepen</p>
+    }
+    else
+    {
+        foreach (var groep in Model.Groepen)
+        {
+            <div id="groep" class="shadow">
+                <h4>Groep #@groep.Id</h4>
+                <h5>Status: @groep.StateDisplayName</h5>
+                <ul>
+                    @foreach (var leerling in groep.Leerlingen)
+                    {
+                        <li>@leerling.Voornam @leerling.Naam</li>
+                    }
+                </ul>
+                @*@Html.Partial("_Vooruitgang", groep)*@
+
+                @if (groep.Vooruitgang.Count != 0)
+                {
+                    <div id="vooruitgang" class="shadow">
+                        <h5>Vooruitgang</h5>
+                        <ul>
+                            @foreach (var vooruitgang in groep.Vooruitgang)
+                            {
+                                <li>@vooruitgang.Line</li>
+                            }
+                        </ul>
+                        <div>
+                            <p>@groep.PlaatsInReeks van de @groep.TotaalAantalOefeningen opdrachten afgewerkt</p>
+                        </div>
+                    </div>
+                }
+
+                @if (groep.HuidigeState == "geblokkeerd")
+                {
+                    <form method="get" asp-controller="Beheren" asp-action="Deblokkeer" asp-route-id="@groep.Id">
+                        <button class="btn btn-danger" type="submit">Deblokkeer</button>
+                    </form>
+                }
+            </div>
+        }
+    }
+    <div id="buttons">
+        <div class="form-group">
+            <form method="get" asp-controller="Beheren" asp-action="ToonGroepen" asp-route-id="@Model.Id">
+                <button class="btn btn-danger" type="submit">Refresh</button>
+
+            </form>
+        </div>
+        <div class="form-group">
+            <form method="get" asp-controller="Beheren" asp-action="Index">
+                <button class="btn btn-primary" type="submit">Terug naar sessies</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+@*Javascript voor dialogbox leerkracht om indien niet alle groepen aangemeld zijn de sessie toch al dan 
+niet te activeren*@
+
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('#btnStartSpel').click(function (e) {
+                e.preventDefault();
+                @if (!Model.AlleGroepenAangemeld) {
+                    <text>
+                        $('#confirmDialog').dialog('open');
+                    </text>
+                }
+                else
+                {
+                    <text>
+                        $('#startSpelForm').submit();
+                    </text>
+                }
+            });
+        });
+        $("#confirmDialog").dialog({
+            autoOpen: false,
+            modal: true,
+            resizable: true,
+            buttons: {
+                "Ok": function () {
+                    $('#startSpelForm').submit();
+                },
+                "Annuleer": function (e) {
+                    $(this).dialog("close");
+                }
+            },
+        });
+    </script>
+}
